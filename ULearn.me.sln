@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rectangles", "Rectangles\Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "if-else", "if-else", "{5AEA90BD-F435-4E6C-8885-509738319E7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distance", "Distance\Distance.csproj", "{A7607F62-2517-4779-84D4-3D378809A97E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{E8B0D136-D22F-4550-A136-BB577FCBEC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8B0D136-D22F-4550-A136-BB577FCBEC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8B0D136-D22F-4550-A136-BB577FCBEC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7607F62-2517-4779-84D4-3D378809A97E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7607F62-2517-4779-84D4-3D378809A97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7607F62-2517-4779-84D4-3D378809A97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7607F62-2517-4779-84D4-3D378809A97E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E8B0D136-D22F-4550-A136-BB577FCBEC8F} = {5AEA90BD-F435-4E6C-8885-509738319E7B}
+		{A7607F62-2517-4779-84D4-3D378809A97E} = {5AEA90BD-F435-4E6C-8885-509738319E7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC91B741-5FCF-40BD-AAB9-45492511D2D4}

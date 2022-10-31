@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Names", "Names\Names.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mazes", "Mazes\Mazes.csproj", "{84C0439A-B05A-4BFC-A73E-BA1F99953814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayShift", "ArrayShift\ArrayShift.csproj", "{7398920E-C6E5-4446-B769-53E2A05D49A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayShift", "ArrayShift\ArrayShift.csproj", "{7398920E-C6E5-4446-B769-53E2A05D49A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

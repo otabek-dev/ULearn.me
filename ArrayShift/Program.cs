@@ -1,5 +1,6 @@
-﻿int arrayLength;
+﻿using ArrayShift;
 
+int arrayLength;
 while (true)
 {
 	Console.Write("Enter array length: ");
@@ -11,24 +12,13 @@ while (true)
 }
 
 var shiftArray = new int[arrayLength];
+
 for (int i = 0; i < shiftArray.Length; i++)
 	shiftArray[i] = i + 1;
 
-var array = new int[arrayLength];
-var shift = 2;
 
-for (int i = 0; i < arrayLength; i++)
-{
-	if (i + shift < arrayLength)
-	{
-		array[i] = shiftArray[i + shift];
-	}
-	else
-	{
-		array[i] = shiftArray[shiftArray.Length - i - shift];
-		shift -= 1;
-	}
-}
 
-foreach (var e in array)
-	Console.Write(e + " ");
+shiftArray.ShiftLeft(3);
+shiftArray.Print();
+shiftArray.ShiftRight(1);
+shiftArray.Print();

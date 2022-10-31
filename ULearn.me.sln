@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAnalysis", "TextAnalysis\TextAnalysis.csproj", "{E7F5D985-677D-4246-BA75-4BAE24DF38B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{13D0AEB1-0749-4EE9-AB05-1620AE603362}"
+	ProjectSection(SolutionItems) = preProject
+		TableParser\table-parser.csproj = TableParser\table-parser.csproj
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arrays", "Arrays", "{EECB7329-A31A-416F-89D6-E97F62242CDF}"
 EndProject

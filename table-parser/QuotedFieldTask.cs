@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using System.Text;
 
 namespace TableParser
 {
@@ -17,15 +13,44 @@ namespace TableParser
             var actualToken = QuotedFieldTask.ReadQuotedField(line, startIndex);
             Assert.AreEqual(new Token(expectedValue, startIndex, expectedLength), actualToken);
         }
-
-        // Добавьте свои тесты
     }
 
-    class QuotedFieldTask
+    internal class QuotedFieldTask
     {
+        private static Token ReadQoted(string line, int startIndex, char check)
+        {
+            var result = new StringBuilder();
+            var len = 0;
+
+            for (int i = startIndex + 1; i < line.Length; i++)
+            {
+                if (line[i] == '\\' && line[i + 1] == check)
+                {
+                    len++;
+                    continue;
+                }
+
+                if (line[i] == check && line[i - 1] != '\\')
+                    return new Token(result.ToString(), startIndex, result.Length + len + 2);
+
+                result.Append(line[i]);
+            }
+
+            return new Token(result.ToString(), startIndex, result.Length + len + 1);
+        }
+
         public static Token ReadQuotedField(string line, int startIndex)
         {
-            return new Token(line, startIndex, line.Length - startIndex);
+            if (line.Length > 0)
+            {
+                if (line[startIndex] == '"')
+                    return ReadQoted(line, startIndex, '"');
+
+                if (line[startIndex] == '\'')
+                    return ReadQoted(line, startIndex, '\'');
+            }
+
+            return new Token(line.ToString(), startIndex, line.Length - startIndex);
         }
     }
 }

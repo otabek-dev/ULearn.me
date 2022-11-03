@@ -1,4 +1,8 @@
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using NUnit.Framework;
 
 namespace TableParser
@@ -15,22 +19,42 @@ namespace TableParser
                 Assert.AreEqual(expectedResult[i], actualResult[i].Value);
             }
         }
-
-        // Скопируйте сюда метод с тестами из предыдущей задачи.
     }
 
     public class FieldsParserTask
     {
-        // При решении этой задаче постарайтесь избежать создания методов, длиннее 10 строк.
-        // Подумайте как можно использовать ReadQuotedField и Token в этой задаче.
         public static List<Token> ParseLine(string line)
         {
-            return new List<Token> { ReadQuotedField(line, 0) }; // сокращенный синтаксис для инициализации коллекции.
+            var tokens = new List<Token>();
+            var nextIndex = 0;
+            while (line.Length > nextIndex)
+            {
+                if (line[nextIndex] != '"' && line[nextIndex] != '\'' && line[nextIndex] != ' ')
+                    tokens.Add(ReadField(line, nextIndex));
+                else if (line[nextIndex] == ' ')
+                {
+                    nextIndex++;
+                    continue;
+                }
+                else
+                    tokens.Add(ReadQuotedField(line, nextIndex));
+
+                nextIndex = tokens[tokens.Count - 1].GetIndexNextToToken();
+            }
+
+            return tokens;
         }
         
         private static Token ReadField(string line, int startIndex)
         {
-            return new Token(line, 0, line.Length);
+            var lastIndex = line.IndexOfAny(new[] { ' ', '"', '\'' }, startIndex + 1);
+            string result;
+            if (lastIndex == -1)
+                result = line.Substring(startIndex, line.Length - startIndex);
+            else
+                result = line.Substring(startIndex, lastIndex - startIndex);
+
+            return new Token(result.Trim(), startIndex, result.Length);
         }
 
         public static Token ReadQuotedField(string line, int startIndex)

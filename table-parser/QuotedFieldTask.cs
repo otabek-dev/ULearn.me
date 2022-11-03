@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Text;
 
 namespace TableParser
@@ -17,20 +18,23 @@ namespace TableParser
 
     internal class QuotedFieldTask
     {
-        private static Token ReadQoted(string line, int startIndex, char check)
+        private static Token ReadQoted(string line, int startIndex, char quotes)
         {
             var result = new StringBuilder();
             var len = 0;
+            var quotes2 = quotes == '"' ? '\'' : '\"';
 
             for (int i = startIndex + 1; i < line.Length; i++)
             {
-                if (line[i] == '\\' && line[i + 1] == check)
+                if (line[i] == '\\' && line[i - 1] != '\\'
+                    && (i + 1 < line.Length)
+                    && (line[i + 1] == quotes || line[i + 1] == quotes2 || line[i + 1] == '\\'))
                 {
                     len++;
                     continue;
                 }
 
-                if (line[i] == check && line[i - 1] != '\\')
+                if (line[i] == quotes && (line[i - 1] != '\\' || (line[i - 1] == '\\' && line[i - 2] == '\\')))
                     return new Token(result.ToString(), startIndex, result.Length + len + 2);
 
                 result.Append(line[i]);

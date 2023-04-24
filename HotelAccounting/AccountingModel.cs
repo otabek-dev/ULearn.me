@@ -38,7 +38,7 @@ namespace HotelAccounting
             get => discount;
             set
             {
-                if (value < 0 || value > 100) throw new ArgumentException();
+                if (value > 100) throw new ArgumentException();
                 discount = value;
                 Notify(nameof(Discount));
                 Notify(nameof(Total));
@@ -51,17 +51,9 @@ namespace HotelAccounting
             set
             {
                 var newTotalDiscount = (1 - (value / (Price * NightsCount))) * 100;
-                if (newTotalDiscount >= 0 && newTotalDiscount <= 100)
-                {
-                    Discount = newTotalDiscount;
-                    total = value;
-                    Notify(nameof(Discount));
-                }
-                else throw new ArgumentException();
+                Discount = newTotalDiscount;
+                total = value;       
             }
         }
-
-
-
     }
 }

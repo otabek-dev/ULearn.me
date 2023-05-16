@@ -8,7 +8,7 @@ namespace PocketGoogle
         private Dictionary<string, Dictionary<int, List<int>>> documents
             = new Dictionary<string, Dictionary<int, List<int>>>();
 
-        public void Add(int id, string documentText)
+        private string[] GetSplitedText(string documentText)
         {
             var separators = new char[]
             {
@@ -16,38 +16,34 @@ namespace PocketGoogle
                 ':', '-', '\r', '\n', '–'
             };
 
-            var startIndex = 0;
-            var text = documentText
+            return documentText
                 .Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private List<T> GetList<T>(T value) => new List<T>() { value };
+
+        public void Add(int id, string documentText)
+        {
+            var startIndex = 0;
+            var text = GetSplitedText(documentText);
 
             foreach (var word in text)
             {
                 if (documents.ContainsKey(word))
                     if (documents[word].ContainsKey(id))
-                        documents[word][id]
-                            .Add(documentText
-                            .IndexOf(word, startIndex));
+                        documents[word][id].Add(documentText.IndexOf(word, startIndex));
                     else
-                        documents[word].Add(
-                             id,
-                             new List<int>() 
-                             { 
-                                 documentText.IndexOf(word, startIndex) 
-                             }
-                        );
+                        documents[word].Add(id,
+                             GetList(documentText.IndexOf(word, startIndex)));
                 else
+                {
                     documents.Add(word,
-                        new Dictionary<int, List<int>>()
-                        {
-                            { 
-                                id, 
-                                new List<int>() 
-                                { 
-                                    documentText
-                                    .IndexOf(word, startIndex) 
-                                } 
-                            }
-                        });
+                        new Dictionary<int, List<int>>());
+                    var listPosition = new List<int> {
+                                    documentText.IndexOf(word, startIndex) };
+
+                    documents[word].Add(id, listPosition);
+                }
 
                 startIndex += word.Length;
             }
